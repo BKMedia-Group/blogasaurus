@@ -1,0 +1,9 @@
+%h1
+  Blog:
+  %span= @category.title
+
+.description= @category.description.html_safe
+- if can? :create, Blogasaurus::Post
+  = link_to 'Create Post', new_post_path(post: {blog_category_id: @category.id}), class: 'btn btn-success'
+.blog-items=render @posts
+= will_paginate @posts

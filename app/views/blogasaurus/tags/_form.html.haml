@@ -1,0 +1,9 @@
+= form_for @tag do |f|
+  = render partial: 'blogasaurus/shared/errors', object: f.object
+  .row
+    .col-md-4.col-sm-12
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+      .actions
+        = f.submit 'Save'

@@ -1,0 +1,17 @@
+.item
+  .row
+    .col-md-2
+      .date
+        .day= post.day
+        .month= post.month
+    .col-md-10
+      %h2= post.title
+      = post.intro_text.html_safe
+      %p
+        .pull-left= link_to 'Read More', post, class: 'button button-blue'
+        .clr
+      - if can? :manage, post
+        %p
+          = link_to 'edit', edit_post_path(post), class: 'btn btn-xs btn-primary'
+          = link_to 'delete', post, method: 'delete', class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}
+      %hr

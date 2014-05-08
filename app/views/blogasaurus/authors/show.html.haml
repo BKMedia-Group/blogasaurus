@@ -1,0 +1,10 @@
+%h1
+  Author:
+  %span= @author.title
+
+.author-photo= image_tag @author.photo.url(:large)
+= @author.bio.html_safe
+.clr
+.blog-items=render @posts
+
+= will_paginate @posts

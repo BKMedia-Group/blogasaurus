@@ -1,0 +1,14 @@
+= form_for @author do |f|
+  = render partial: 'blogasaurus/shared/errors', object: f.object
+  .row
+    .col-md-4
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :photo
+        = f.file_field :photo, class: 'form-control'
+    .col-md-8
+      = f.label :bio
+      = f.text_area :bio, class: 'form-control'
+  = f.submit

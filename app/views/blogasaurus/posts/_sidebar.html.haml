@@ -1,0 +1,6 @@
+.h2 Categories
+- Blogasaurus::Category.all.each do |category|
+  %p= link_to category.title, category
+.h2 Tags
+- Blogasaurus::Tag.all.each do |tag|
+  %p= link_to tag.title, tag

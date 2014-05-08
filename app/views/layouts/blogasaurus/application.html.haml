@@ -1,0 +1,11 @@
+!!!html
+%html
+  %head
+    %title Blogasaurus
+    = stylesheet_link_tag    "blogasaurus/application", media: "all"
+    = javascript_include_tag "blogasaurus/application"
+    = csrf_meta_tags
+%body
+  = render 'layouts/blogasaurus/admin_menu'
+  .container
+    = yield

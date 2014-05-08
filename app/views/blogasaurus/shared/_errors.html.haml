@@ -1,0 +1,6 @@
+- if errors.errors.any?
+  #error_explanation.alert.alert-danger
+    %h2= "#{pluralize(errors.errors.count, "error")} prohibited this blog from being saved:"
+    %ul
+      - errors.errors.full_messages.each do |msg|
+        %li= msg

@@ -1,0 +1,23 @@
+.blog
+  %h1= @post.title
+  .byline
+    = @post.created_at.strftime('%B %e, %Y')
+    \|
+    = link_to @post.category.title, @post.category
+  = @post.intro_text.html_safe
+  - if @post.images.any?
+    - if @post.needs_gallery?
+      .gallery
+        .frame
+        .images
+          - @post.images.each do |image|
+            = link_to image_tag(image.url(:small)), image.url(:large)
+          .clr
+    - else
+      .blog-img= image_tag @post.image.url(:medium)
+  = @post.full_text.html_safe
+  .author
+    .author-image= image_tag @post.author.photo.url(:small)
+    .author-bio
+      = link_to @post.author.title, @post.author
+      = @post.author.bio.html_safe

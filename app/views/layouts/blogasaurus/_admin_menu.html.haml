@@ -1,0 +1,8 @@
+- if can? :manage, Blogasaurus::Post
+  .container
+    .navbar.navbar-default
+      %ul.nav.navbar-nav
+        %li= link_to 'Posts', posts_path
+        %li= link_to 'Categories', categories_path
+        %li= link_to 'Tags', tags_path
+        %li= link_to 'Authors', authors_path

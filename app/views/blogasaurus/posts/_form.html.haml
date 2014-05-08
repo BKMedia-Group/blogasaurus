@@ -1,0 +1,58 @@
+= form_for @post do |f|
+  = render partial: 'blogasaurus/shared/errors', object: f.object
+  .row
+    .col-md-4
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :slug
+        = f.text_field :slug, class: 'form-control'
+      .form-group
+        = f.label :published
+        .radio
+          = f.label :published, value: true, class: 'radio-inline' do
+            = f.radio_button :published, true
+            Yes
+          = f.label :published, value: false, class: 'radio-inline' do
+            = f.radio_button :published, false
+            No
+      .form-group
+        = f.label :created_at, 'Publish On'
+        %p= f.date_select :created_at
+      .form-group
+        = f.label :author_id
+        = f.collection_select :author_id, Blogasaurus::Author.all, :id, :title, {}, class: 'form-control chosen'
+      .form-group
+        = f.label :category_id
+        = f.collection_select :category_id, Blogasaurus::Category.all, :id, :title, {}, class: 'form-control chosen'
+      .form-group
+        = f.label :tag_id_list, 'Tags'
+        = f.collection_select :tag_id_list, Blogasaurus::Tag.all, :id, :title, {}, class: 'form-control chosen', multiple: true
+    .col-md-8
+      .form-group
+        = f.label :intro_text
+        = f.text_area :intro_text, class: 'form-control'
+      .form-group
+        = f.label :full_text
+        = f.text_area :full_text, class: 'form-control'
+      %table.table
+        %thead
+          %tr
+            %th Image
+            %th ALT
+            %th Position
+            %th Destroy
+        %tbody
+          = f.fields_for :images do |ff|
+            %tr
+              %td
+                = ff.hidden_field :id
+                - if ff.object.persisted?
+                  = image_tag ff.object.url(:small)
+                - else
+                  = ff.file_field :file
+              %td= ff.text_field :alt, class: 'form-control'
+              %td= ff.text_field :position, class: 'form-control'
+              %td= ff.check_box :_destroy
+  = f.submit
