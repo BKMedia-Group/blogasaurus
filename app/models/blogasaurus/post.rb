@@ -9,7 +9,7 @@ module Blogasaurus
     has_many :tags, through: :tag_refs
     has_many :comments, dependent: :destroy
 
-    has_many :images, order: :position
+    has_many :images
     accepts_nested_attributes_for :images, allow_destroy: true, reject_if: :missing_image
 
     validates :author, :category, :full_text, :intro_text, :title, presence: true
