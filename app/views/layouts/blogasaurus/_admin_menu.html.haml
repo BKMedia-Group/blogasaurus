@@ -1,6 +1,6 @@
 - if can? :manage, Blogasaurus::Post
-  .container
-    .navbar.navbar-default
+  .container.admin-menu
+    .navbar.navbar-inverse
       %ul.nav.navbar-nav
         %li= link_to 'Posts', posts_path
         %li= link_to 'Categories', categories_path
