@@ -1,0 +1,18 @@
+.gallery {
+  .frame {
+    position: relative;
+    overflow: hidden;
+    img {
+      position: absolute;
+    }
+  }
+  .images {
+    margin-top: 10px;
+    width: 650px;
+    a {
+      margin: 0 10px 10px 0;
+      display: block;
+      float: left;
+    }
+  }
+}

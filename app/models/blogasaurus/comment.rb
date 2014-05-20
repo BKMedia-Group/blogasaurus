@@ -9,7 +9,7 @@ module Blogasaurus
       self.email = email.downcase
     end
 
-    def photo_url
+    def gravatar_url
       require 'digest/md5'
       hash = Digest::MD5.hexdigest(email)
       "http://www.gravatar.com/avatar/#{hash}"

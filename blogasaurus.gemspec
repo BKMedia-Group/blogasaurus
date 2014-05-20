@@ -27,6 +27,8 @@ Gem::Specification.new do |s|
   s.add_dependency "will_paginate"
   s.add_dependency "acts_as_list"
   s.add_dependency "jquery-rails"
+  s.add_dependency "ckeditor"
+  s.add_dependency "recaptcha"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "factory_girl_rails"

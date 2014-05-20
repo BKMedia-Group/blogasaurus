@@ -21,3 +21,35 @@
     .author-bio
       = link_to @post.author.title, @post.author
       = @post.author.bio.html_safe
+  .comments
+    %hr
+    %h2 Comments
+    - @post.comments.each do |comment|
+      - next unless comment.persisted?
+      .comment
+        .name= comment.name
+        .when= time_ago_in_words(comment.created_at) + ' ago'
+        .image= image_tag comment.gravatar_url
+        .body
+          %p= comment.text
+          - if can? :manage, comment
+            %p= link_to 'delete', comment, method: 'delete', data: {confirm: 'Are you sure?'}
+        .clr
+    .form
+      = form_for @comment do |f|
+        = render partial: 'blogasaurus/shared/errors', object: f.object
+        = f.hidden_field :post_id
+        .row-fluid
+          .col-md-6
+            .field
+              = f.label :name
+              = f.text_field :name
+          .col-md-6
+            .field
+              = f.label :email
+              = f.text_field :email
+        .field
+          = f.label :text, 'Comment'
+          = f.text_area :text, rows: 3
+        .field= recaptcha_tags display: {theme: 'clean'}
+        = f.submit 'Post Comment'

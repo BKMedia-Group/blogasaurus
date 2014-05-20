@@ -7,6 +7,8 @@ require 'paperclip'
 require 'will_paginate'
 require 'acts_as_list'
 require 'jquery-rails'
+require 'ckeditor'
+require 'recaptcha'
 
 module Blogasaurus
 end
