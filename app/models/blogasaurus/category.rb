@@ -7,5 +7,9 @@ module Blogasaurus
     validates :title, :description, presence: true
 
     has_attached_file :photo, styles: {thumb: ['200x200^', :jpg]}, convert_options: {thumb: '-gravity center -extent 200x200'}
+
+    def to_s
+      title
+    end
   end
 end

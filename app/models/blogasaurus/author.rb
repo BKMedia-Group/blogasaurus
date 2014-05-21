@@ -21,5 +21,9 @@ module Blogasaurus
     after_destroy do
       blogs.update_all blog_author: BlogAuthor.first
     end
+
+    def to_s
+      title
+    end
   end
 end

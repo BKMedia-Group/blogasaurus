@@ -11,7 +11,11 @@ module Blogasaurus
     # GET /posts
     # GET /posts.json
     def index
-      @posts = @posts.page(params[:page])
+      if params[:search_term]
+        @posts = @posts.search(params[:search_term]).page(params[:page])
+      else
+        @posts = @posts.page(params[:page])
+      end
     end
 
     # GET /posts/1
@@ -94,6 +98,7 @@ module Blogasaurus
                                      :category_id,
                                      :image,
                                      :title,
+                                     :created_at,
                                      {images_attributes: [:id, :file, :position, :alt, :_destroy]},
                                      {tag_id_list: []},
                                      :published

@@ -7,7 +7,7 @@ module Blogasaurus
     default_scope lambda { order :position }
 
     has_attached_file :file,
-                      styles: {large: ['640x426', :jpg], medium: ['300x300', :jpg], small: ['120x120^', :jpg]},
+                      styles: {large: ['700', :jpg], medium: ['300x300', :jpg], small: ['120x120^', :jpg]},
                       convert_options: {small: '-gravity center -extent 120x120'}
     validates_attachment_content_type :file, :content_type => %w(image/jpeg image/jpg image/png)
 

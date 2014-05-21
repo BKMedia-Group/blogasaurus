@@ -1,5 +1,6 @@
 %h1 Welcome to our blog
 - if can? :create, Blogasaurus::Post
-  = link_to 'Create Post', new_post_path, class: 'btn btn-success'
+  .well
+    = link_to 'Create Post', new_post_path, class: 'btn btn-success'
 .blog-items=render @posts
 = will_paginate

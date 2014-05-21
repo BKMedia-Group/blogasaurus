@@ -15,9 +15,16 @@ module Blogasaurus
     validates :author, :category, :full_text, :intro_text, :title, presence: true
 
     # we don't want any categoryless records in here.
-    scope :published, -> { where(:published, true).where('category_id IS NOT NULL').where('created_at > ?', Time.now) }
+    scope :published, -> { where(published: true) }
+
+    default_scope { order 'created_at DESC' }
 
     self.per_page = 10
+
+    def self.search(term)
+      like = Rails.env.production? ? 'ILIKE' : 'LIKE'
+      where("title #{like} :term OR intro_text #{like} :term OR full_text #{like} :term", term: "%#{term}%")
+    end
 
     def tag_id_list=(ids)
       self.tags = ids.reject {|id| id.blank? }.map { |id| Tag.find id }
