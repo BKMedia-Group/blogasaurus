@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    blogasaurus (0.0.2)
+    blogasaurus (0.0.3)
       acts_as_list
       bootstrap-sass
       cancan
