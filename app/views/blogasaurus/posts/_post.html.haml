@@ -6,6 +6,11 @@
         .month= post.month
     .col-md-10
       %h2= post.title
+      - unless post.published
+        .alert.alert-danger Not Published
+      - else
+        - if Time.now < post.created_at
+          .alert.alert-warning Scheduled to publish in the future
       = post.intro_text.html_safe
       %p
         .pull-left= link_to 'Read More', post, class: 'button button-blue'

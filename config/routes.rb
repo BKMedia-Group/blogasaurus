@@ -5,5 +5,5 @@ Blogasaurus::Engine.routes.draw do
   resources :categories
   resources :tags
   resources :comments
-  root to: 'blogs#index'
+  root to: 'posts#index'
 end
