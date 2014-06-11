@@ -46,7 +46,7 @@ module Blogasaurus
       images.length > 1
     end
     def missing_image(params)
-      params[:file].blank?
+      params[:file].blank? && params[:alt].blank? && params[:position].blank? && params[:_destroy] == '0'
     end
   end
 end

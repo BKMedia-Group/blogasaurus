@@ -2,9 +2,7 @@ module Blogasaurus
   class Image < ActiveRecord::Base
     belongs_to :post
 
-    acts_as_list scope: :post
-
-    default_scope lambda { order :position }
+    default_scope lambda { order(:position).order(:id) }
 
     has_attached_file :file,
                       styles: {large: ['700', :jpg], medium: ['300x300', :jpg], small: ['120x120^', :jpg]},
