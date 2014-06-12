@@ -44,7 +44,7 @@ module Blogasaurus
     # PATCH/PUT /blog_authors/1.json
     def update
       respond_to do |format|
-        if @author.update(blog_author_params)
+        if @author.update(author_params)
           format.html { redirect_to @author, notice: 'Author was successfully updated.' }
           format.json { head :no_content }
         else
