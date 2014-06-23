@@ -8,7 +8,7 @@ module Blogasaurus
         can :manage, :all
       else
         can :show, [Category, Tag, Author]
-        can :read, Post, ['published = ? AND category_id IS NOT NULL AND created_at < ?', true, Time.now] do |post|
+        can :read, Post, ['blogasaurus_posts.published = ? AND blogasaurus_posts.category_id IS NOT NULL AND blogasaurus_posts.created_at < ?', true, Time.now] do |post|
           post.created_at <= Time.now and post.category != nil
         end
       end
