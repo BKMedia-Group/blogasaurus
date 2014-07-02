@@ -11,4 +11,8 @@ require 'ckeditor'
 require 'recaptcha'
 
 module Blogasaurus
+  mattr_accessor :user_class
+  def self.user_class
+    @@user_class.constantize || 'User'.constantize
+  end
 end

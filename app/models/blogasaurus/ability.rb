@@ -3,7 +3,7 @@ module Blogasaurus
     include CanCan::Ability
 
     def initialize(user)
-      user ||= User.new # guest user (not logged in)
+      user ||= Blogasaurus.user_class.new # guest user (not logged in)
       if user.try :admin?
         can :manage, :all
       else
