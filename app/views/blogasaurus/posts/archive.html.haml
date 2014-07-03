@@ -1,0 +1,11 @@
+%h1
+  Blog Archive:
+  - if params[:month].blank?
+    = params[:year]
+  - else
+    #{Date::MONTHNAMES[params[:month].to_i]} #{params[:year]}
+- if can? :create, Blogasaurus::Post
+  .well
+    = link_to 'Create Post', new_post_path, class: 'btn btn-success'
+.blog-items=render @posts
+= will_paginate

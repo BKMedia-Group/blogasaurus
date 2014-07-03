@@ -18,6 +18,18 @@ module Blogasaurus
       end
     end
 
+    def archive
+      redirect_to posts_path if params[:year].blank?
+      if params[:month].blank?
+        start_date = Time.new params[:year].to_i
+        end_date = start_date + 1.year
+      else
+        start_date = Time.new params[:year].to_i, params[:month].to_i
+        end_date = start_date + 1.month
+      end
+      @posts = @posts.where('created_at > ?', start_date).where('created_at < ?', end_date).page(params[:page])
+    end
+
     # GET /posts/1
     # GET /posts/1.json
     def show

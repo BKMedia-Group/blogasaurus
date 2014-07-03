@@ -1,6 +1,8 @@
 Blogasaurus::Engine.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  resources :posts
+  resources :posts do
+    get 'archive/:year(/:month)', action: 'archive', on: :collection, as: :archive
+  end
   resources :authors
   resources :categories
   resources :tags
