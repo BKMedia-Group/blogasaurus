@@ -8,4 +8,4 @@
   .well
     = link_to 'Create Post', new_post_path, class: 'btn btn-success'
 .blog-items=render @posts
-= will_paginate
+= paginate @posts

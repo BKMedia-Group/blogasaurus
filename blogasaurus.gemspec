@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bootstrap-sass"
   s.add_dependency "cancan"
   s.add_dependency "paperclip"
-  s.add_dependency "will_paginate"
+  s.add_dependency "kaminari"
   s.add_dependency "acts_as_list"
   s.add_dependency "jquery-rails"
   s.add_dependency "ckeditor"

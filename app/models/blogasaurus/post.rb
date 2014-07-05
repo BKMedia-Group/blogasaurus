@@ -19,7 +19,7 @@ module Blogasaurus
 
     default_scope { order 'created_at DESC' }
 
-    self.per_page = 10
+    paginates_per 10
 
     def self.search(term)
       like = Rails.env.production? ? 'ILIKE' : 'LIKE'
