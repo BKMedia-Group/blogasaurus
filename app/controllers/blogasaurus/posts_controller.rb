@@ -110,6 +110,7 @@ module Blogasaurus
                                      :category_id,
                                      :image,
                                      :title,
+                                     :video_embed_code,
                                      :created_at,
                                      {images_attributes: [:id, :file, :position, :alt, :_destroy]},
                                      {tag_id_list: []},

@@ -36,6 +36,9 @@
       .form-group
         = f.label :full_text
         = f.cktext_area :full_text, class: 'form-control'
+      .form-group
+        = f.label :video_embed_code
+        = f.text_area :video_ebmed_code, class: 'form-control'
       %table.table
         %thead
           %tr

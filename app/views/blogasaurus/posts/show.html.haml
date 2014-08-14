@@ -5,6 +5,8 @@
     \|
     = link_to @post.category.title, @post.category
   = @post.intro_text.html_safe
+  - unless @post.video_embed_code.blank?
+    .video= @post.video_embed_code.html_safe
   - if @post.images.any?
     - if @post.needs_gallery?
       .gallery
