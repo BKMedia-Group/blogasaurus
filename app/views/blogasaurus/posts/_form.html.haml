@@ -29,6 +29,9 @@
       .form-group
         = f.label :tag_id_list, 'Tags'
         = f.collection_select :tag_id_list, Blogasaurus::Tag.all, :id, :title, {}, class: 'form-control chosen', multiple: true
+      .form-group
+        = f.label :video_embed_code
+        = f.text_area :video_embed_code, rows: 6, class: 'form-control'
     .col-md-8
       .form-group
         = f.label :intro_text
@@ -36,9 +39,6 @@
       .form-group
         = f.label :full_text
         = f.cktext_area :full_text, class: 'form-control'
-      .form-group
-        = f.label :video_embed_code
-        = f.text_area :video_embed_code, class: 'form-control'
       %table.table
         %thead
           %tr
