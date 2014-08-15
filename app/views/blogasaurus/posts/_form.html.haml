@@ -32,6 +32,9 @@
       .form-group
         = f.label :video_embed_code
         = f.text_area :video_embed_code, rows: 6, class: 'form-control'
+      .form-group
+        = f.label :video_thumbnail
+        = f.file_field :video_thumbnail, class: 'form-control'
     .col-md-8
       .form-group
         = f.label :intro_text

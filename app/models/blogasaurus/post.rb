@@ -19,6 +19,11 @@ module Blogasaurus
 
     default_scope { order 'created_at DESC' }
 
+    has_attached_file :video_thumbnail,
+                      styles: {small: ['120x120^', :jpg]},
+                      convert_options: {small: '-gravity center -extent 120x120'}
+    validates_attachment_content_type :video_thumbnail, :content_type => %w(image/jpeg image/jpg image/png)
+
     self.per_page = 10
 
     def self.search(term)
@@ -41,6 +46,9 @@ module Blogasaurus
     end
     def image
       images.first.try :file
+    end
+    def thumbnail_image
+      image || video_thumbnail
     end
     def needs_gallery?
       images.length > 1

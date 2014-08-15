@@ -111,6 +111,7 @@ module Blogasaurus
                                      :image,
                                      :title,
                                      :video_embed_code,
+                                     :video_thumbnail,
                                      :created_at,
                                      {images_attributes: [:id, :file, :position, :alt, :_destroy]},
                                      {tag_id_list: []},
