@@ -33,6 +33,8 @@ module Blogasaurus
     # GET /posts/1
     # GET /posts/1.json
     def show
+      # webkit gets crabby about redirecting to this page due to iframe video
+      response.headers['X-XSS-Protection'] = "0"
       @comment = @post.comments.build
     end
 
@@ -113,7 +115,17 @@ module Blogasaurus
                                      :video_embed_code,
                                      :video_thumbnail,
                                      :created_at,
-                                     {images_attributes: [:id, :file, :position, :alt, :_destroy]},
+                                     {images_attributes: [
+                                       :id,
+                                       :file,
+                                       :position,
+                                       :alt,
+                                       :inline,
+                                       :alignment,
+                                       :caption,
+                                       :code,
+                                       :_destroy
+                                     ]},
                                      {tag_id_list: []},
                                      :published
       end

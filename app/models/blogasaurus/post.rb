@@ -3,6 +3,8 @@ module Blogasaurus
 
     include Blogasaurus::Concerns::Sluggable
 
+    IMAGE_REGEX = /(<p>\[image ([^\]]+)\]<\/p>)/
+
     belongs_to :author
     belongs_to :category
     has_many :tag_refs, dependent: :destroy
@@ -34,6 +36,33 @@ module Blogasaurus
     def tag_id_list=(ids)
       self.tags = ids.reject {|id| id.blank? }.map { |id| Tag.find id }
     end
+    def intro_text_images
+      text_images :intro_text
+    end
+    def full_text_images
+      text_images :full_text
+    end
+    def intro_text_no_images
+      text_no_images :intro_text
+    end
+    def full_text_no_images
+      text_no_images :full_text
+    end
+    def text_images(method)
+      rval = send method
+      rval.scan(IMAGE_REGEX).uniq.each do |match, code|
+        image = images.where(inline: true, code: code).first
+        html = "<p><strong>image not found</strong></p>"
+        if image
+          html = "<div class='inline-image #{image.alignment_class}'><img src='#{image.inline_url}' />#{image.caption_html}</div>"
+        end
+        rval = rval.gsub match, html
+      end
+      rval
+    end
+    def text_no_images(method)
+      send(method).gsub IMAGE_REGEX, ''
+    end
     def tag_id_list
       tags.map {|tag| tag.id}
     end
@@ -45,16 +74,19 @@ module Blogasaurus
       Date::ABBR_MONTHNAMES[created_at.month] + '.'
     end
     def image
+      images.not_inline.first.try :file
+    end
+    def any_image
       images.first.try :file
     end
     def thumbnail_image
-      image || video_thumbnail
+      any_image || video_thumbnail
     end
     def needs_gallery?
-      images.length > 1
+      images.not_inline.length > 1
     end
     def missing_image(params)
-      params[:file].blank? && params[:alt].blank? && params[:position].blank? && params[:_destroy] == '0'
+      params[:file].blank? && params[:id].blank?
     end
   end
 end

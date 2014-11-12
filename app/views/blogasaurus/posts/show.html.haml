@@ -7,12 +7,12 @@
   = @post.intro_text.html_safe
   - unless @post.video_embed_code.blank?
     .video= @post.video_embed_code.html_safe
-  - if @post.images.any?
+  - if @post.images.not_inline.any?
     - if @post.needs_gallery?
       .gallery
         .frame
         .images
-          - @post.images.each do |image|
+          - @post.images.not_inline.each do |image|
             = link_to image_tag(image.url(:small)), image.url(:large)
           .clr
     - else

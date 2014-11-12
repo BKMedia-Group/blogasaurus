@@ -1,3 +1,15 @@
+:coffee
+  $ ->
+    $('.inline-checkbox').each ->
+      $this = $(this)
+      fields = $this.closest('td').find('.inline')
+      do_it = ->
+        if $this.is(':checked')
+          fields.show()
+        else
+          fields.hide()
+      $this.change do_it
+      do_it()
 = form_for @post do |f|
   = render partial: 'blogasaurus/shared/errors', object: f.object
   .row
@@ -52,7 +64,7 @@
         %tbody
           = f.fields_for :images do |ff|
             %tr
-              %td
+              %td{rowspan: '2', width: '10%'}
                 = ff.hidden_field :id
                 - if ff.object.persisted?
                   = image_tag ff.object.url(:small)
@@ -61,4 +73,19 @@
               %td= ff.text_field :alt, class: 'form-control'
               %td= ff.text_field :position, class: 'form-control'
               %td= ff.check_box :_destroy
+            %tr
+              %td{colspan: '3', width: '90%'}
+                = ff.label :inline do
+                  = ff.check_box :inline, class: 'inline-checkbox'
+                  Inline
+                %div.inline
+                  .form-group
+                    = ff.label :code, class: 'control-label'
+                    = ff.text_field :code, class: 'form-control'
+                  .form-group
+                    = ff.label :aligment, class: 'control-label'
+                    = ff.select :alignment, options_for_select(Blogasaurus::Image.alignments, ff.object.alignment), {}, class: 'form-control'
+                  .form-group
+                    = ff.label :caption, class: 'control-label'
+                    = ff.text_area :caption, class: 'form-control'
   = f.submit
