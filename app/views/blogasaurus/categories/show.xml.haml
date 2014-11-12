@@ -1,0 +1,12 @@
+!!!xml
+%rss{version: '2.0', 'xmlns:media' => 'http://search.yahoo.com/mrss/'}
+  %channel
+    %title= @category.title
+    %description= strip_tags(@category.description.html_safe)
+    %link= category_url(@category)
+    %lastBuildDate= @posts.first.created_at
+    %pubDate= @posts.first.created_at
+    %ttl 1800
+
+    = render @posts
+

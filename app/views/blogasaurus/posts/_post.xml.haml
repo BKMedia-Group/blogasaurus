@@ -1,0 +1,8 @@
+%item
+  %title= post.title
+  %description= strip_tags(post.intro_text)
+  %pubDate= post.created_at
+  %category= post.category.title
+  %link= post_url(post)
+  <media:content url="#{URI.join root_url, post.thumbnail_image.url(:small)}" medium='image' width="270" height="180" />
+  %author #{post.author.title}
