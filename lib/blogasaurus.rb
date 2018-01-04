@@ -13,6 +13,6 @@ require 'recaptcha'
 module Blogasaurus
   mattr_accessor :user_class
   def self.user_class
-    @@user_class.constantize || 'User'.constantize
+    @@user_class.try(:constantize) || 'User'.constantize
   end
 end
